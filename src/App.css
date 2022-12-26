@@ -1,0 +1,21 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: rgb(242, 242, 245);
+}
+
+body {
+  background-color: rgb(242, 242, 245);
+  position: relative;
+  min-height: 100vh;
+
+  color: #222;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.App {
+  width: 1190px;
+  margin: 0 auto;
+}
