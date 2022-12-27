@@ -5,15 +5,20 @@ import { createXHR } from '../utils'
 
 
 function Index() {
-    const bundleConfrim = async () => {
-        createXHR('', 'POST', {
+    const [loading, setLoading] = useState(-1)
+    const bundleConfrim = async (index: number) => {
+        if (loading !== -1) return
+        setLoading(index)
+        createXHR('/buy', 'POST', {
             goodsId: 12,
             goodsName: 'abc'
         }, (res: any) => {
             const { accessSign, chainCode, goodsOrderId, payOrderId } = res
             window.location.href = `https://testnet-web3.hashnut.io/pay?accessSign=${accessSign}&mchOrderNo=${goodsOrderId}&platformId=${payOrderId}&chainCode=${chainCode}`
         }, (res: any) => {
+            setLoading(-1)
         }, () => {
+            setLoading(-1)
         })
     }
 
@@ -35,8 +40,8 @@ function Index() {
                                     <span className={style.orderCount}>{item.count}</span>
                                 </span>
                             </div>
-                            <div onClick={bundleConfrim} className={`${style.btn} ${style.btnBorder}`}>
-                                Pay Now
+                            <div onClick={() => { bundleConfrim(index) }} className={`${style.btn} ${style.btnBorder}`}>
+                                {loading === index ? 'loading...' : 'Pay Now'}
                             </div>
                         </div>
                     )

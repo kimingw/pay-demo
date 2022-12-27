@@ -1,4 +1,4 @@
-const urlPrefix = '/api'
+const urlPrefix = '/shop'
 
 const createXHR = (url: string, method: string, data: any, sussCallback?: any, failCallback?: any, complete?: any) => {
     const xhr = new XMLHttpRequest()
