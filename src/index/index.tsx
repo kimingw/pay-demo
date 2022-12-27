@@ -1,8 +1,21 @@
 import { useState, useEffect, useContext } from 'react'
 import style from './index.module.css'
 import content from './cards'
+import { createXHR } from '../utils'
+
 
 function Index() {
+    const bundleConfrim = async () => {
+        createXHR('', 'POST', {
+            goodsId: 12,
+            goodsName: 'abc'
+        }, (res: any) => {
+            const { accessSign, chainCode, goodsOrderId, payOrderId } = res
+            window.location.href = `https://testnet-web3.hashnut.io/pay?accessSign=${accessSign}&mchOrderNo=${goodsOrderId}&platformId=${payOrderId}&chainCode=${chainCode}`
+        }, (res: any) => {
+        }, () => {
+        })
+    }
 
     return (
         <div className={style.commodity}>
@@ -22,7 +35,7 @@ function Index() {
                                     <span className={style.orderCount}>{item.count}</span>
                                 </span>
                             </div>
-                            <div className={`${style.btn} ${style.btnBorder}`}>
+                            <div onClick={bundleConfrim} className={`${style.btn} ${style.btnBorder}`}>
                                 Pay Now
                             </div>
                         </div>
